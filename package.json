@@ -1,0 +1,17 @@
+{
+  "name": "react-inspector",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^1.0.14",
+    "@types/chrome": "^0.0.195",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.15"
+  }
+}
