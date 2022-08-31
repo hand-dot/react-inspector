@@ -60,7 +60,7 @@ const handleElementPointerover = (e: PointerEvent) => {
   inspector.style.width = `${width}px`;
   inspector.style.height = `${height}px`;
 
-  let label = "This React element cannot be inspected.";
+  let label = "This element cannot be inspected.";
   const sourceCode = findFiberByHostInstance(target)?._debugSource;
   if (sourceCode) {
     const { fileName, lineNumber, columnNumber } = sourceCode;
@@ -69,7 +69,12 @@ const handleElementPointerover = (e: PointerEvent) => {
   }
 
   inspector.innerHTML = `
-  <span style="position: absolute; padding: 3px; color:white; background:black; white-space:nowrap;">
+  <span style="position: absolute;
+    padding: 3px;
+    color:white;
+    background-color: rgb(0 0 0 / 75%);
+    border-radius: 0 0 5px 5px;
+    white-space:nowrap;">
     ${label}
   </span>`;
 };
