@@ -13,4 +13,11 @@ script.onload = () => {
   });
 };
 
+window.addEventListener("message", ({ data }) => {
+  if (data === "inspected") {
+    const res = chrome.runtime.sendMessage(data);
+    res.catch(() => {});
+  }
+});
+
 document.head.append(script);

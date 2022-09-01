@@ -46,6 +46,8 @@ const handleInspectorClick = (e: MouseEvent) => {
     return;
   }
 
+  target.id = "_TMP";
+  window.postMessage("inspected", "*");
   window.open(getVsCodeLink(fiber._debugSource));
 };
 

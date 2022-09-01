@@ -6,6 +6,7 @@ const manifest = defineManifest({
   name: "React Inspector",
   version: "1.0.0",
   content_scripts: [{ js: ["src/content.ts"], matches: ["<all_urls>"] }],
+  devtools_page: "src/devtools.html",
   background: { service_worker: "src/background.ts", type: "module" },
   commands: {
     inspect: {
@@ -22,4 +23,7 @@ const manifest = defineManifest({
 export default defineConfig({
   server: { port: 54321 },
   plugins: [crx({ manifest })],
+  optimizeDeps: {
+    entries: ["src/*.html"],
+  },
 });
