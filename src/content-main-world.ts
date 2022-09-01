@@ -42,7 +42,7 @@ const handleInspectorClick = (e: MouseEvent) => {
 
   const fiber = findFiberByHostInstance(target);
   if (!fiber) {
-    alert("You can't open VSCode for this element.");
+    alert("This element cannot be opened in VSCode.");
     return;
   }
 
@@ -53,7 +53,7 @@ window.addEventListener("message", ({ data }: { data: string }) => {
   if (data === "inspect") {
     if (!checkDevtoolsGlobalHook()) {
       alert(`This page is not available to use the React Inspector.
-Make sure React Developer Tools is installed and DevTools is open.`);
+Make sure React Developer Tools is installed and enabled.`);
       return;
     }
 

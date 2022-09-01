@@ -16,10 +16,7 @@ export const checkDevtoolsGlobalHook = (): boolean =>
   window.__REACT_DEVTOOLS_GLOBAL_HOOK__ &&
   window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers &&
   window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.size > 0 &&
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.get(1) &&
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.rendererInterfaces &&
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.rendererInterfaces.size > 0 &&
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.rendererInterfaces.get(1);
+  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.get(1);
 
 // TODO Refactoring needed ref react/packages/react-devtools-shared/src/backend/agent.js getBestMatchingRendererInterface
 export const getDevtoolsGlobalHookRenderer = () => {
