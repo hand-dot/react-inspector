@@ -15,7 +15,7 @@ You can detect and open the React component source code easily.
 
 ## How it works
 
-The React Inspector accesses the `__REACT_DEVTOOLS_GLOBAL_HOOK__` set globally by the React Devtools and finds the [React Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber) in the HTML element that the inspector hovered over.
+The React Inspector accesses the `__REACT_DEVTOOLS_GLOBAL_HOOK__` set globally by the React Devtools and finds the [React Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber) from the HTML element that the inspector hovered over.
 The React Fiber contains information about the source code that will be added during development, so we use that information to open the VSCode.
 
 Reference
