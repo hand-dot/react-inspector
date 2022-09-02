@@ -24,12 +24,6 @@ export const getDevtoolsGlobalHookRenderer = () => {
   return window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.get(1);
 };
 
-// TODO Refactoring needed ref react/packages/react-devtools-shared/src/backend/agent.js getBestMatchingRendererInterface
-export const getDevtoolsGlobalHookRendererInterface = () => {
-  if (!checkDevtoolsGlobalHook()) return null;
-  return window.__REACT_DEVTOOLS_GLOBAL_HOOK__.rendererInterfaces.get(1);
-};
-
 export const getVsCodeLink = (sourceCode: DebugSource) =>
   `vscode://file${sourceCode.fileName}:${sourceCode.lineNumber}:${sourceCode.columnNumber}`;
 

@@ -8,12 +8,33 @@ import Overlay from "./Overlay";
 let overlay: Overlay | null = null;
 
 let inspecting = false;
+const mousePos = { x: 0, y: 0 };
+
+const getInspectName = (element: HTMLElement) => {
+  const fiber = findFiberByHostInstance(element);
+  if (!fiber) return "Source code could not be identified.";
+  const { fileName, columnNumber, lineNumber } = fiber._debugSource;
+  const path = fileName.split("/");
+
+  return `${path.at(-3)}/${path.at(-2)}/${path.at(
+    -1
+  )}:${lineNumber}:${columnNumber}`;
+};
 
 const startInspectorMode = () => {
   inspecting = true;
   if (!overlay) {
     overlay = new Overlay();
   }
+  const element = document.elementFromPoint(
+    mousePos.x,
+    mousePos.y
+  ) as HTMLElement | null;
+  if (element) {
+    // highlight the initial point.
+    overlay.inspect([element], getInspectName(element));
+  }
+
   window.addEventListener("pointerover", handleElementPointerOver, true);
   window.addEventListener("click", handleInspectorClick, true);
 };
@@ -30,8 +51,8 @@ const exitInspectorMode = () => {
 
 const handleElementPointerOver = (e: PointerEvent) => {
   const target = e.target as HTMLElement | null;
-  if (!target) return;
-  if (overlay) overlay.inspect([target]);
+  if (!target || !overlay) return;
+  overlay.inspect([target], getInspectName(target));
 };
 
 const handleInspectorClick = (e: MouseEvent) => {
@@ -46,7 +67,9 @@ const handleInspectorClick = (e: MouseEvent) => {
     return;
   }
 
-  target.id = "_TMP";
+  const tmpId = "_TMP";
+  document.getElementById(tmpId)?.removeAttribute("id");
+  target.id = tmpId;
   window.postMessage("inspected", "*");
   window.open(getVsCodeLink(fiber._debugSource));
 };
@@ -75,5 +98,10 @@ const handleInspectElement = (e: KeyboardEvent) => {
 };
 
 window.addEventListener("keydown", handleInspectElement);
+
+window.addEventListener("mousemove", (e: MouseEvent) => {
+  mousePos.x = e.clientX;
+  mousePos.y = e.clientY;
+});
 
 export {};
