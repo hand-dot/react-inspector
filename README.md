@@ -7,15 +7,20 @@ Easily detect React components source code from Chrome!
 The Inspector launch with Ctrl+Shift+X (Command+Shift+X on Mac).  
 You can detect and open the React component source code easily.
 
+1. Run the Dev server and Open your react app.
+2. Press Ctrl+Shift+X (Command+Shift+X on Mac) on Chrome.
+3. Inspect your react components and click it.
+
+
 ## Requirements
 
-- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+- Installed [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
 - Works only with development builds.
 - Source code must be stored on local disk
 
 ## How it works
 
-The React Inspector accesses the `__REACT_DEVTOOLS_GLOBAL_HOOK__` set globally by the React Devtools and finds the [React Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber) from the HTML element that the inspector hovered over.
+The React Inspector accesses the `__REACT_DEVTOOLS_GLOBAL_HOOK__` set globally by the React Devtools and finds the [React Fiber](https://reactjs.org/docs/faq-internals.html#what-is-react-fiber) in the HTML element that the inspector hovered over.
 The React Fiber contains information about the source code that will be added during development, so we use that information to open the VSCode.
 
 Reference
