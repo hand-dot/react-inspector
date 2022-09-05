@@ -14,7 +14,7 @@ const manifest = defineManifest({
   action: {
     default_title: "React Inspector: Press Ctrl+Shift+X (Command+Shift+X on Mac)",
   },
-  version: "1.0.0",
+  version: "1.1.0",
   content_scripts: [{ js: ["src/content.ts"], matches: ["<all_urls>"] }],
   devtools_page: "src/devtools.html",
   background: { service_worker: "src/background.ts", type: "module" },
