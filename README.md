@@ -1,5 +1,7 @@
 # React Inspector
 
+YOU CAN TRY 👉 https://chrome.google.com/webstore/detail/react-inspector/gkkcgbepkkhfnnjolcaggogkjodmlpkh
+
 Easily detect React components source code from Chrome!
 
 ![CleanShot 2022-09-02 at 18 08 23](https://user-images.githubusercontent.com/24843808/188106077-ff409aeb-0145-4977-9be2-16d04809cc78.gif)
