@@ -9,12 +9,6 @@ const sendInspectSignal = async (msg: string, tabId?: number) => {
   chrome.tabs.sendMessage(target, msg);
 };
 
-chrome.commands.onCommand.addListener((command) => {
-  if (command === "inspect") {
-    sendInspectSignal("inspect");
-  }
-});
-
 const reactInspectorMenuItemId = "react-inspector";
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -25,12 +19,20 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
+chrome.commands.onCommand.addListener((command) => {
+  if (command === "inspect") {
+    sendInspectSignal("inspect");
+  }
+});
+
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === reactInspectorMenuItemId) {
-    if (tab && tab.id) {
-      sendInspectSignal("inspect", tab.id);
-    }
+    sendInspectSignal("inspect", tab?.id);
   }
+});
+
+chrome.action.onClicked.addListener((tab) => {
+  sendInspectSignal("inspect", tab.id);
 });
 
 export {};

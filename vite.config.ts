@@ -11,6 +11,9 @@ const manifest = defineManifest({
     "48": "icon/icon48.png",
     "128": "icon/icon128.png",
   },
+  action: {
+    default_title: "React Inspector: Press Ctrl+Shift+X (Command+Shift+X on Mac)",
+  },
   version: "1.0.0",
   content_scripts: [{ js: ["src/content.ts"], matches: ["<all_urls>"] }],
   devtools_page: "src/devtools.html",
