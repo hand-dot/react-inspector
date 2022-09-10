@@ -1,24 +1,25 @@
 import {
   checkDevtoolsGlobalHook,
-  getVsCodeLink,
   findFiberByHostInstance,
+  getEditorLink,
 } from "./utils";
 import Overlay from "./Overlay";
+import { DEFAULT_OPEN_IN_EDITOR_URL } from "./constants";
 
 let overlay: Overlay | null = null;
-
 let inspecting = false;
+let openInEditorUrl = DEFAULT_OPEN_IN_EDITOR_URL;
 const mousePos = { x: 0, y: 0 };
 
 const getInspectName = (element: HTMLElement) => {
   const fiber = findFiberByHostInstance(element);
   if (!fiber) return "Source code could not be identified.";
   const { fileName, columnNumber, lineNumber } = fiber._debugSource;
-  const path = fileName.split("/");
+  const path = (fileName || "").split("/");
 
-  return `${path.at(-3)}/${path.at(-2)}/${path.at(
-    -1
-  )}:${lineNumber}:${columnNumber}`;
+  return `${path.at(-3) || ""}/${path.at(-2) || ""}/${path.at(-1)}:${
+    lineNumber || 0
+  }:${columnNumber || 0}`;
 };
 
 const startInspectorMode = () => {
@@ -71,22 +72,27 @@ const handleInspectorClick = (e: MouseEvent) => {
   document.getElementById(tmpId)?.removeAttribute("id");
   target.id = tmpId;
   window.postMessage("inspected", "*");
-  window.open(getVsCodeLink(fiber._debugSource));
+  window.open(getEditorLink(openInEditorUrl, fiber._debugSource));
 };
 
-window.addEventListener("message", ({ data }: { data: string }) => {
-  if (data !== "inspect") return;
+window.addEventListener("message", ({ data }) => {
+  if (data !== "inspect" && data.type !== "options") return;
 
-  if (!checkDevtoolsGlobalHook()) {
-    alert(`This page is not available to use the React Inspector.
-Make sure React Developer Tools is installed and enabled.`);
-    return;
+  if (data === "inspect") {
+    if (!checkDevtoolsGlobalHook()) {
+      alert(`This page is not available to use the React Inspector.
+  Make sure React Developer Tools is installed and enabled.`);
+      return;
+    }
+    if (inspecting) {
+      exitInspectorMode();
+    } else {
+      startInspectorMode();
+    }
   }
 
-  if (inspecting) {
-    exitInspectorMode();
-  } else {
-    startInspectorMode();
+  if (data.type === "options" && data.openInEditorUrl) {
+    openInEditorUrl = data.openInEditorUrl;
   }
 });
 

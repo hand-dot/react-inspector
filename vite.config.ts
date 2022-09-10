@@ -12,11 +12,13 @@ const manifest = defineManifest({
     "128": "icon/icon128.png",
   },
   action: {
-    default_title: "React Inspector: Press Ctrl+Shift+X (Command+Shift+X on Mac)",
+    default_title:
+      "React Inspector: Press Ctrl+Shift+X (Command+Shift+X on Mac)",
   },
   version: "1.1.0",
   content_scripts: [{ js: ["src/content.ts"], matches: ["<all_urls>"] }],
   devtools_page: "src/devtools.html",
+  options_page: "src/options.html",
   background: { service_worker: "src/background.ts", type: "module" },
   commands: {
     inspect: {
@@ -24,7 +26,7 @@ const manifest = defineManifest({
       description: 'Inspect the page using the "React Inspector" extension.',
     },
   },
-  permissions: ["activeTab", "scripting", "contextMenus"],
+  permissions: ["activeTab", "scripting", "contextMenus", "storage"],
 });
 
 export default defineConfig({

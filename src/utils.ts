@@ -24,23 +24,6 @@ const getDevtoolsGlobalHookRenderer = () => {
   return window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.get(1);
 };
 
-export const getVsCodeLink = (sourceCode: DebugSource) => {
-  const { fileName, lineNumber, columnNumber } = sourceCode;
-  let link = "";
-  const scheme = "vscode://";
-  link += scheme;
-  if (fileName) {
-    link += `file/${fileName}`;
-  }
-  if (lineNumber) {
-    link += `:${lineNumber}`;
-  }
-  if (columnNumber) {
-    link += `:${columnNumber}`;
-  }
-  return link;
-};
-
 export const findFiberByHostInstance = (
   target: HTMLElement
 ): { _debugSource: DebugSource } | null => {
@@ -52,6 +35,17 @@ export const findFiberByHostInstance = (
   const fiber = renderer.findFiberByHostInstance(target) || null;
 
   return fiber && fiber._debugSource ? fiber : null;
+};
+
+export const getEditorLink = (
+  openInEditorUrl: string,
+  debugSource: DebugSource
+) => {
+  const { fileName, columnNumber, lineNumber } = debugSource;
+  return openInEditorUrl
+    .replace("{path}", fileName || "")
+    .replace("{line}", lineNumber ? lineNumber.toString() : "0")
+    .replace("{column}", columnNumber ? columnNumber.toString() : "0");
 };
 
 export {};
