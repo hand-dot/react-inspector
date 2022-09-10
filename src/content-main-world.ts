@@ -64,7 +64,7 @@ const handleInspectorClick = (e: MouseEvent) => {
 
   const fiber = findFiberByHostInstance(target);
   if (!fiber) {
-    alert("This element cannot be opened in VSCode.");
+    alert("This element cannot be opened in React Inspector.");
     return;
   }
 
