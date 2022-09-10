@@ -75,18 +75,18 @@ const handleInspectorClick = (e: MouseEvent) => {
 };
 
 window.addEventListener("message", ({ data }: { data: string }) => {
-  if (data === "inspect") {
-    if (!checkDevtoolsGlobalHook()) {
-      alert(`This page is not available to use the React Inspector.
-Make sure React Developer Tools is installed and enabled.`);
-      return;
-    }
+  if (data !== "inspect") return;
 
-    if (inspecting) {
-      exitInspectorMode();
-    } else {
-      startInspectorMode();
-    }
+  if (!checkDevtoolsGlobalHook()) {
+    alert(`This page is not available to use the React Inspector.
+Make sure React Developer Tools is installed and enabled.`);
+    return;
+  }
+
+  if (inspecting) {
+    exitInspectorMode();
+  } else {
+    startInspectorMode();
   }
 });
 
