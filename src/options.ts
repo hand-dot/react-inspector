@@ -1,6 +1,6 @@
 import { DEFAULT_OPEN_IN_EDITOR_URL } from "./constants";
 
-const restoreOptions = () => {
+const initOptions = () => {
   const openInEditorUrl = document.getElementById(
     "open-in-editor-url"
   ) as HTMLInputElement;
@@ -13,20 +13,34 @@ const restoreOptions = () => {
   );
 };
 
-const saveOptions = () => {
+const saveOptions = (feedbackMsg: string) => {
   const openInEditorUrl = document.getElementById(
     "open-in-editor-url"
   ) as HTMLInputElement;
   chrome.storage.sync.set({ openInEditorUrl: openInEditorUrl.value }, () => {
     const status = document.getElementById("status")!;
-    status.textContent = "Options saved.";
+    status.textContent = feedbackMsg;
     setTimeout(() => {
       status.textContent = "";
-    }, 750);
+    }, 1000);
   });
 };
 
-document.addEventListener("DOMContentLoaded", restoreOptions);
-document.getElementById("save")!.addEventListener("click", saveOptions);
+const restoreDefault = () => {
+  const openInEditorUrl = document.getElementById(
+    "open-in-editor-url"
+  ) as HTMLInputElement;
+
+  openInEditorUrl.value = DEFAULT_OPEN_IN_EDITOR_URL;
+  saveOptions("Options restored to default.");
+};
+
+document.addEventListener("DOMContentLoaded", initOptions);
+document
+  .getElementById("save")!
+  .addEventListener("click", () => saveOptions("Options saved."));
+document
+  .getElementById("restore-default")!
+  .addEventListener("click", restoreDefault);
 
 export {};
