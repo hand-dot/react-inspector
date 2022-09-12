@@ -13,6 +13,15 @@ You can detect and open the React component source code easily.
 2. Press Ctrl+Shift+X (Command+Shift+X on Mac) on Chrome.
 3. Inspect your react components and click it.
 
+---
+
+You can edit the open in editor URL on the options page. If you are not VSCode user, you can edit it to your favorite editor URL-schemes.
+
+![CleanShot 2022-09-12 at 13 11 18](https://user-images.githubusercontent.com/24843808/189572510-a54463ff-1f11-4c92-a19f-007ad113009b.png)
+
+![CleanShot 2022-09-12 at 13 10 27](https://user-images.githubusercontent.com/24843808/189572514-0c7993b4-0067-4984-8ee2-89ba978907ed.png)
+
+
 
 ## Requirements
 
