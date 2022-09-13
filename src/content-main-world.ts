@@ -97,7 +97,7 @@ window.addEventListener("message", ({ data }) => {
 });
 
 const handleInspectElement = (e: KeyboardEvent) => {
-  if (e.key.toLowerCase() === "escape") {
+  if (e.key?.toLowerCase() === "escape") {
     e.preventDefault();
     exitInspectorMode();
   }
