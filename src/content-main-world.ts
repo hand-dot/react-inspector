@@ -10,6 +10,7 @@ let overlay: Overlay | null = null;
 let inspecting = false;
 let openInEditorUrl = DEFAULT_OPEN_IN_EDITOR_URL;
 const mousePos = { x: 0, y: 0 };
+let openInEditorMethod = 'url';
 
 const getInspectName = (element: HTMLElement) => {
   const fiber = findFiberByHostInstance(element);
@@ -56,7 +57,7 @@ const handleElementPointerOver = (e: PointerEvent) => {
   overlay.inspect([target], getInspectName(target));
 };
 
-const handleInspectorClick = (e: MouseEvent) => {
+const handleInspectorClick = async (e: MouseEvent) => {
   e.preventDefault();
   exitInspectorMode();
   const target = e.target as HTMLElement | null;
@@ -72,7 +73,13 @@ const handleInspectorClick = (e: MouseEvent) => {
   document.getElementById(tmpId)?.removeAttribute("id");
   target.id = tmpId;
   window.postMessage("inspected", "*");
-  window.open(getEditorLink(openInEditorUrl, fiber._debugSource));
+
+  const deepLink = getEditorLink(openInEditorUrl, fiber._debugSource)
+  if(openInEditorMethod === 'fetch'){
+    fetch(deepLink);
+  }else{
+    window.open(deepLink);
+  }
 };
 
 window.addEventListener("message", ({ data }) => {
@@ -93,6 +100,7 @@ window.addEventListener("message", ({ data }) => {
 
   if (data.type === "options" && data.openInEditorUrl) {
     openInEditorUrl = data.openInEditorUrl;
+    openInEditorMethod = data.openInEditorMethod;
   }
 });
 

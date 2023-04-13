@@ -4,33 +4,129 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root{
+        --darkBlue:#2c364b;
+        --action-bg-hover: #c9e0ff;
+        --primary-action: #0b69cb;
+        --primary-action-hover: #0b5198;
+      }
+
+      body {
+        background: var(--darkBlue);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label{
+        width:100%;
+        max-width: 500px;
+        margin-bottom: 2px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      input[type="text"] {
+        padding: 7px;
+        width:100%;
+        border-color: #afafaf;
+        outline:none;
+        border-width: 1px;
+        border-radius: 4px;
+        border-style: solid;
+        transition: box-shadow ease-out 100ms;
+      }
+
+      input:hover {
+        box-shadow: 0 3px 8px rgba(0,0,0,.1);
+        outline:none;
+      }
+
+      input:focus{
+        border-color: var(--primary-action);
+        box-shadow: 0 3px 8px rgba(0,0,0,.2);
+      }
+
+      select {
+        margin-top: 10px;
+        padding: 4px;
+      }
+
+      h1 {
+        color: #3d3d3d;
+      }
+
+      .container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+        min-width: 700px;
+      }
+
+      button {
+        border: none;
+        outline: none;
+        padding: 10px 15px;
+        font-weight: 600;
+        border-radius: 5px;
+        background: none;
+        cursor: pointer;
+        color: #0b69cb;
+      }
+
+      button:hover{
+        background: var(--action-bg-hover);
+      }
+
+      button.primary{
+        background: var(--primary-action);
+        color:white;
+      }
+
+      button.primary:hover{
+        background: var(--primary-action-hover);
+        color:white;
+      }
+
+      #status{
+        margin-top: 20px;
+        font-size: 14px;
+      }
+
+    </style>
   </head>
-  <body>
-    <div>
+  <body class="bg-blue-900">
+    <div class="container">
+      <img src="../icon/icon128.png" alt="logo">
       <h1>React Inspector Options</h1>
-      <ul
-        style="
-          border-top: 1px solid #eee;
-          border-bottom: 1px solid #eee;
-          padding-top: 3rem;
-          padding-bottom: 3rem;
-        "
-      >
-        <li>
-          <label>
-            Open in Editor URL:
-            <input
-              id="open-in-editor-url"
-              style="width: 100%; max-width: 300px"
-              type="text"
-              placeholder="vscode://file/{path}:{line}:{column}"
-            />
-          </label>
-        </li>
-      </ul>
-      <div id="status" style="height: 1rem"></div>
-      <button id="save" style="margin-right: 1rem">Save</button>
-      <button id="restore-default">Restore Default</button>
+      <div>
+        <button id="restore-default">VS Code (default)</button>
+        <button id="webstorm">Webstorm / IntelliJ</button>
+      </div>
+      <hr>
+      <label>
+        Open in Editor URL:
+        <input
+          id="open-in-editor-url"
+          type="text"
+          placeholder="vscode://file/{path}:{line}:{column}"
+        />
+      </label>
+      <label>
+        Method
+        <select id="open-in-editor-method">
+          <option value="url">Open in URL</option>
+          <option value="fetch">Call with fetch</option>
+        </select>
+      </label>
+      <button class="primary" id="save" style="margin-top:1rem">Save</button>
+      <div id="status"></div>
     </div>
     <script type="module" src="./options.ts"></script>
   </body>
