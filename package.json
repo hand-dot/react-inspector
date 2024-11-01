@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^1.0.14",
+    "@crxjs/vite-plugin": "2.0.0-beta.26",
     "@types/chrome": "^0.0.195",
     "typescript": "^4.6.4",
-    "vite": "^2.9.15"
+    "vite": "^5.4.10"
   }
 }
