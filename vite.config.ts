@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
-import { crx, defineManifest } from "@crxjs/vite-plugin";
+import { crx, defineManifest, ManifestV3Export  } from "@crxjs/vite-plugin";
 
-const manifest = defineManifest({
+const manifest: ManifestV3Export = defineManifest({
   manifest_version: 3,
   name: "React Inspector",
   description:
