@@ -15,7 +15,7 @@ const manifest: ManifestV3Export = defineManifest({
     default_title:
       "React Inspector: Press Ctrl+Shift+X (Command+Shift+X on Mac)",
   },
-  version: "1.2.2",
+  version: "1.2.4",
   content_scripts: [{ js: ["src/content.ts"], matches: ["<all_urls>"] }],
   devtools_page: "src/devtools.html",
   options_page: "src/options.html",
